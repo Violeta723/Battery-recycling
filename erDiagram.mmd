@@ -1,0 +1,69 @@
+erDiagram
+    SALESORDERHEADER {
+        int SalesOrderID PK
+        int RevisionNumber
+        date OrderDate
+        date DueDate
+        date ShipDate
+        int Status
+        string SalesOrderNumber
+        string PurchaseOrderNumber
+        string AccountNumber
+        int CustomerID FK
+        int ContactID
+        int SalesPersonID FK
+        int TerritoryID FK
+        int BillToAddressID
+        int ShipToAddressID
+        int ShipMethodID
+        int CreditCardID
+        string CreditCardApprovalCode
+        int CurrencyRateID
+        decimal SubTotal
+        decimal TaxAmt
+        decimal Freight
+        decimal TotalDue
+        string Comment
+        string rowguid
+        date ModifiedDate
+    }
+
+    SALESPERSON {
+        int SalesPersonID PK
+        int TerritoryID FK
+        decimal SalesQuota
+        decimal Bonus
+        decimal CommissionPct
+        decimal SalesYTD
+        decimal SalesLastYear
+        string rowguid
+        date ModifiedDate
+    }
+
+    SALESTERRITORY {
+        int TerritoryID PK
+        string Name
+        string CountryRegionCode
+        string Group
+        decimal SalesYTD
+        decimal SalesLastYear
+        decimal CostYTD
+        decimal CostLastYear
+        string rowguid
+        date ModifiedDate
+    }
+
+    CUSTOMER {
+        int CustomerID PK
+        int TerritoryID FK
+        string AccountNumber
+        string CustomerType
+        string rowguid
+        date ModifiedDate
+    }
+
+    SALESORDERHEADER ||--o{ CUSTOMER : "CustomerID"
+    SALESORDERHEADER ||--o{ SALESPERSON : "SalesPersonID"
+    SALESORDERHEADER ||--o{ SALESTERRITORY : "TerritoryID"
+    SALESPERSON ||--o{ SALESTERRITORY : "TerritoryID"
+    CUSTOMER ||--o{ SALESTERRITORY : "TerritoryID"
